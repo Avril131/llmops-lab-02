@@ -2,6 +2,10 @@
 
 from __future__ import annotations
 
+import os
+
+DEFAULT_PROVIDER = "mock"
+
 
 def load_config() -> dict:
     """
@@ -13,4 +17,10 @@ def load_config() -> dict:
     - OPENAI_MODEL
     """
     # TODO: implement this function.
-    raise NotImplementedError("Implement load_config().")
+    # read os.environ on every call so tests and the CLI see current values
+    return {
+        "LLM_PROVIDER": os.environ.get("LLM_PROVIDER", DEFAULT_PROVIDER).strip().lower()
+        or DEFAULT_PROVIDER,
+        "OPENAI_API_KEY": os.environ.get("OPENAI_API_KEY", "").strip(),
+        "OPENAI_MODEL": os.environ.get("OPENAI_MODEL", "").strip(),
+    }

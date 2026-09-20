@@ -14,4 +14,6 @@ class BaseProvider(ABC):
     def generate(self, prompt: str) -> LLMResponse:
         """Generate a response for the given prompt."""
         # TODO: implement this abstract method contract.
-        raise NotImplementedError("Implement BaseProvider.generate().")
+        # stays abstract on purpose: the contract is "take a prompt, return an
+        # LLMResponse", and every concrete provider must supply its own body
+        raise NotImplementedError("Subclasses must implement generate().")
